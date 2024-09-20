@@ -62,18 +62,14 @@ By embedding Mono in a C++ DLL, we can instruct the Unity game to run our C# che
 
 		public class hack : MonoBehaviour
 		{
-			public void Start()
-			{
-				OnGUI();
-			}
-
 			public void Update()
 			{
-				//
+				// This function is called every frame
 			}
 
 			public void OnGUI()
 			{
+				// This function handles GUI related things
 				GUI.Label(new Rect(10, 10, 200, 40), "Cheat Activated!");
 			}
 		}
@@ -81,7 +77,7 @@ By embedding Mono in a C++ DLL, we can instruct the Unity game to run our C# che
 	```
 	- Base functionality: This code creates a persistent GameObject that displays a message on the screen, confirming that the cheat is active.
 	- Class Structure Explanation: We have 2 classes one named Loader and one named hack. The loader class is what we will actually inject into our game, which will then create a game object for our hack class to run on. The hack class is where we code our actual cheat in.
-	- The Methods Explanation: The methods in the hack class named: Start, Update, and OnGUI are all built in functions within unity see [here](https://docs.unity3d.com/ScriptReference/MonoBehaviour.html) for more information.
+	- The Methods Explanation: The methods in the hack class named: Update, and OnGUI are all built in functions within unity see [here](https://docs.unity3d.com/ScriptReference/MonoBehaviour.html) for more information.
 	- What is GUI.Label: Where to learn more about the Gui.Label function from [here](https://docs.unity3d.com/ScriptReference/GUI.html).
 
 ### Step 3: Creating our C++ Mono Injector

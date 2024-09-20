@@ -1,7 +1,7 @@
 import { getSidebar } from "vitepress-plugin-auto-sidebar";
 
 export default {
-  base: "/vitepress-boilerplate/",
+  base: "/PixelPirates/",
   title: "VitePress Boilerplate",
   description: "An awesome boilerplate for a simple vitepress site",
   lastUpdated: true,

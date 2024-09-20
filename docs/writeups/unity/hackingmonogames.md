@@ -1,174 +1,199 @@
 # Hacking Mono Unity Games Writeup
 
-> This was written and tested on The Forest but will work the exact same for any Mono Unity game.
+> This guide provides a step-by-step approach to hacking Mono Unity games, specifically using The Forest as an example. The concepts and techniques discussed here are applicable to any Mono Unity game.
 
-## So hacking Unity Mono games is fairly straight forward. Lets go over some of the base concepts before I get into the steps of how I went about it.
+# Introduction
+> Hacking Unity Mono games can be straightforward with the right tools and knowledge. This writeup will walk you through the process of creating a cheat using C# and injecting it into the game via a C++ DLL.
 
-- What is Mono? Mono is a JIT (Just in time) compiler. The reason this is great is Mono is installable and better yet we can embed it within our own code.
+# Understanding The Basics
 
-- What is Injecting? Injecting is the process of injecting in our case .dll files that we want our program to run.
+### What is Mono?
+1. Mono is an open source development platform based on the .NET Framework, which allows developers to build cross-platform applications.
+	- It accomplishes this with a JIT (Just in Time) compiler
+		- This works by taking code from C# for example, and translating it to a language the computer can understand at runtime.
+2. It can be embedded within programs
 
-- Why are these 2 things important? Well we use Mono embedded in a C++ .dll file that uses embedded Mono to tell our Unity Mono game to run a C# .dll file that has a loader and hack class within it. This loader class will then create a game object and set it to not destroyable so its permanent. Then our hack class inherits Monobehavior from unity and then runs its method Start() which engages our cheat.
+### What Is DLL Injection?
+DLL Injection is a method used for runnning code within the address space of another process by forcing it to load a dynamic-link library or DLL.
 
-# The tools used for this:
-- DNS Spy
-- Process Hacker
-- Visual Studio Community 2022 (make sure to install unity c++ and any other of the initial install options you have (I did all to be safe))
-- Mono (Included as a tool because we install it from there site and use its included headers to embed Mono in our C++ .dll file)
+### Why Are These Important?
+By embedding Mono in a C++ DLL, we can instruct the Unity game to run our C# cheat code. This cheat can manipulate game objects, execute custom functions or use existing game functions.
+
+# Tools Needed:
+- [dnSpy](https://github.com/dnSpyEx/dnSpy)
+- [Process Hacker](https://sourceforge.net/projects/processhacker/) (Or any .dll injector)
+- [Visual Studio Community 2022](https://visualstudio.microsoft.com/vs/)
+- [Mono](https://www.mono-project.com/download/stable/)
 
 # Credits:
-- https://www.unknowncheats.me/forum/general-programming-and-reversing/285864-beginners-guide-hacking-unity-games.html
-- https://www.unknowncheats.me/forum/unity/268053-mono-unity-injector.html (I got the Mono injector from here as I wanted an open source one to dig into and understand i did not write my own yet, but I may in future as for now I am happy with this open source one. As such this writeup will not contain much regarding the injector besides the small change to set the right names and directories.)
+- [Beginners Guide Hacking Unity Games](https://www.unknowncheats.me/forum/general-programming-and-reversing/285864-beginners-guide-hacking-unity-games.html)
+- [Mono Unity Injector](https://www.unknowncheats.me/forum/unity/268053-mono-unity-injector.html)
 
-# The process:
-> Before even starting:
-- Install Mono and DNS Spy
-- Find out what version of .net your game uses in my case The Forest uses .net 3.5. You have to use the same .net version in your C# .dll cheat or it will not work. You can do this with DNS Spy opening a .dll from the games Managed folder and clicking it, in the right side window you will see a comment that says Runtime: .NET Framework 3.5 (3.5 will change depending on the game that is your version)
+# Step by Step Process:
+### Step 1: Preparing Your Enviornment
+1. Install Mono and dnSpy
+2. Determine The .NET Version:
+	- Use dnSpy to open a DLL from the game's Managed folder. Look for the Runtime version (e.g., .NET Framework 3.5 for The Forest).
 
-> Making our C# .dll cheat:
-- Create our Class Library (.NET Framework) project this is the exact name that you want to look for when making your project make sure you choose the correct version of .NET for your game.
-- Once made and loaded in, hover over project in the top and then choose the add reference option then click browse in the window it displays then browse again to open your files. Navigate to your games Managed folder here is an example directory for my game: C:\Program Files (x86)\Steam\steamapps\common\The Forest\TheForest_Data\Managed once there add every single .dll file except mscorlib.dll and all system dlls.
-- I will attach code below giving a fully functional cheat class that displays a message in the top right of your screen, I will explain the code below.
+### Step 2: Creating The C# DLL Cheat
+1. Open Visual Studio and create a new project:
+	- Choose Class Library (.NET Framework)
+	- Select the appropriate .NET version for your game
+2. Add references:
+	- Hover over project at the top, then choose the add reference option, then click browse in the window it displays, then click browse at the bottom right to open your files, Navigate to your games Managed folder and add the .dll files you require, to start add the Assembly-CSharp.dll file.
+	- An example of what the path to the games Managed folder should look like: C:\Program Files (x86)\Steam\steamapps\common\The Forest\TheForest_Data\Managed
+3. Coding the cheat:
+	- Enter the following code:
+	``` c#
+	using UnityEngine;
 
-``` c#
-using UnityEngine;
+	namespace TheForestCheato
+	{
+		public class Loader
+		{
+			public static void Init()
+			{
+				Loader.load = new GameObject();
+				Loader.load.AddComponent<hack>();
+				UnityEngine.Object.DontDestroyOnLoad(Loader.load);
+			}
+			private static GameObject load;
+		}
 
-namespace TheForestCheato
-{
-    public class Loader
-    {
-        public static void Init()
-        {
-            Loader.load = new GameObject();
-            Loader.load.AddComponent<hack>();
-            UnityEngine.Object.DontDestroyOnLoad(Loader.load);
-        }
-        private static GameObject load;
-    }
+		public class hack : MonoBehaviour
+		{
+			public void Start()
+			{
+				OnGUI();
+			}
 
-    public class hack : MonoBehaviour
-    {
-        public void Start()
-        {
-            OnGUI();
-        }
+			public void Update()
+			{
+				//
+			}
 
-        public void Update()
-        {
-            //
-        }
+			public void OnGUI()
+			{
+				GUI.Label(new Rect(10, 10, 200, 40), "Cheat Activated!");
+			}
+		}
+	}
+	```
+	- Base functionality: This code creates a persistent GameObject that displays a message on the screen, confirming that the cheat is active.
+	- Class Structure Explanation: We have 2 classes one named Loader and one named hack. The loader class is what we will actually inject into our game, which will then create a game object for our hack class to run on. The hack class is where we code our actual cheat in.
+	- The Methods Explanation: The methods in the hack class named: Start, Update, and OnGUI are all built in functions within unity see [here](https://docs.unity3d.com/ScriptReference/MonoBehaviour.html) for more information.
+	- What is GUI.Label: Where to learn more about the Gui.Label function from [here](https://docs.unity3d.com/ScriptReference/GUI.html).
 
-        public void OnGUI()
-        {
-            GUI.Label(new Rect(10, 10, 200, 40), "Cheat Activated!");
-        }
-    }
-}
-```
-- This is creating a namespace called TheForestCheato with 2 classes inside of it. One class the loader has a method named Init this init method is what is injected into our game and it creates a gameobject for our cheat class to run on and tells Unity's garbage collector to not destroy it making it permanent. The second class named hack is our actual cheat. It has 3 methods within it all of these methods are default methods in the Unity engine. The Start method is called initially and triggers OnGUI which draws our text on the top right of our screen letting us know our cheat worked.
-- For this simple writeup I will not go any more in depth with this code or what all you can do check the Unity docs and do your research you have access to litrally the entire engine and all methods within the game. You can modify ANYTHING you essentially have a verified .dll that the game will run and execute all code within it.
+### Step 3: Creating our C++ Mono Injector
+1. Create a new Dynamic-Link Library (DLL) project in Visual Studio
+2. Set up include directories:
+	- Click on Project at the top, then go to project properties, then C/C++, then inside the Additional Include Directories text box add the path to our Mono includes: C:\Program Files\Mono\include\mono-2.0
+3. Implement injector code:
+	- Use the following code:
+	``` cpp
+	// dllmain.cpp : Defines the entry point for the DLL application.
+	#include "pch.h"
+	#include <windows.h>
+	#include <iostream>
+	#include <mono/jit/jit.h>
 
-> Making our C++ .dll Mono Injector:
-- This part will not be super in depth as I stated above in the credits I did not write this. I found it and it was open source. I will go over the few things you will need to change depending on what you do.
-- Create our Dynamic-Link Library (DLL) project. Then once loaded into it hover over project then go to YourProjectName Properties option and then go to C/C++ then in the option Additional Include Directories add our path to Mono includes here is an example directory (This will depend on where you installed Mono): C:\Program Files\Mono\include\mono-2.0
-- I will send the code below
-``` cpp
-// dllmain.cpp : Defines the entry point for the DLL application.
-#include "pch.h"
-#include <windows.h>
-#include <iostream>
-#include <mono/jit/jit.h>
+	#define ASSEMBLY_PATH "/TheForestCheato.dll" // Change to your file name (this depends on what you named your project)
+	#define PAYLOAD_NAMESPACE "TheForestCheato" // Change to your namespace (This will depend on what your namespace in your C# code is)
+	#define PAYLOAD_CLASS "Loader" // Leave same
+	#define PAYLOAD_MAIN "Init" // Leave same
+	#define MONO_DLL L"mono.dll" // Leave same
 
-#define ASSEMBLY_PATH "/TheForestCheato.dll" // Change to your file name (this depends on what you named your project)
-#define PAYLOAD_NAMESPACE "TheForestCheato" // Change to your namespace (This will depend on what your namespace in your C# code is)
-#define PAYLOAD_CLASS "Loader" // Leave same
-#define PAYLOAD_MAIN "Init" // Leave same
-#define MONO_DLL L"mono.dll" // Leave same
+	// typedefs and fields for required mono functions
+	typedef void(__cdecl* t_mono_thread_attach)(MonoDomain*);
+	t_mono_thread_attach fnThreadAttach;
+	typedef  MonoDomain* (__cdecl* t_mono_get_root_domain)(void);
+	t_mono_get_root_domain fnGetRootDomain;
+	typedef MonoAssembly* (__cdecl* t_mono_assembly_open)(const char*, MonoImageOpenStatus*);
+	t_mono_assembly_open fnAssemblyOpen;
+	typedef MonoImage* (__cdecl* t_mono_assembly_get_image)(MonoAssembly*);
+	t_mono_assembly_get_image fnAssemblyGetImage;
+	typedef MonoClass* (__cdecl* t_mono_class_from_name)(MonoImage*, const char*, const char*);
+	t_mono_class_from_name fnClassFromName;
+	typedef MonoMethod* (__cdecl* t_mono_class_get_method_from_name)(MonoClass*, const char*, int);
+	t_mono_class_get_method_from_name fnMethodFromName;
+	typedef MonoObject* (__cdecl* t_mono_runtime_invoke)(MonoMethod*, void*, void**, MonoObject**);
+	t_mono_runtime_invoke fnRuntimeInvoke;
+	typedef const char* (__cdecl* t_mono_assembly_getrootdir)(void);
+	t_mono_assembly_getrootdir fnGetRootDir;
 
-// typedefs and fields for required mono functions
-typedef void(__cdecl* t_mono_thread_attach)(MonoDomain*);
-t_mono_thread_attach fnThreadAttach;
-typedef  MonoDomain* (__cdecl* t_mono_get_root_domain)(void);
-t_mono_get_root_domain fnGetRootDomain;
-typedef MonoAssembly* (__cdecl* t_mono_assembly_open)(const char*, MonoImageOpenStatus*);
-t_mono_assembly_open fnAssemblyOpen;
-typedef MonoImage* (__cdecl* t_mono_assembly_get_image)(MonoAssembly*);
-t_mono_assembly_get_image fnAssemblyGetImage;
-typedef MonoClass* (__cdecl* t_mono_class_from_name)(MonoImage*, const char*, const char*);
-t_mono_class_from_name fnClassFromName;
-typedef MonoMethod* (__cdecl* t_mono_class_get_method_from_name)(MonoClass*, const char*, int);
-t_mono_class_get_method_from_name fnMethodFromName;
-typedef MonoObject* (__cdecl* t_mono_runtime_invoke)(MonoMethod*, void*, void**, MonoObject**);
-t_mono_runtime_invoke fnRuntimeInvoke;
-typedef const char* (__cdecl* t_mono_assembly_getrootdir)(void);
-t_mono_assembly_getrootdir fnGetRootDir;
+	void initMonoFunctions(HMODULE mono) {
+		fnThreadAttach = (t_mono_thread_attach)GetProcAddress(mono, "mono_thread_attach");
+		fnGetRootDomain = (t_mono_get_root_domain)GetProcAddress(mono, "mono_get_root_domain");
+		fnAssemblyOpen = (t_mono_assembly_open)GetProcAddress(mono, "mono_assembly_open");
+		fnAssemblyGetImage = (t_mono_assembly_get_image)GetProcAddress(mono, "mono_assembly_get_image");
+		fnClassFromName = (t_mono_class_from_name)GetProcAddress(mono, "mono_class_from_name");
+		fnMethodFromName = (t_mono_class_get_method_from_name)GetProcAddress(mono, "mono_class_get_method_from_name");
+		fnRuntimeInvoke = (t_mono_runtime_invoke)GetProcAddress(mono, "mono_runtime_invoke");
+		fnGetRootDir = (t_mono_assembly_getrootdir)GetProcAddress(mono, "mono_assembly_getrootdir");
+	}
 
-void initMonoFunctions(HMODULE mono) {
-	fnThreadAttach = (t_mono_thread_attach)GetProcAddress(mono, "mono_thread_attach");
-	fnGetRootDomain = (t_mono_get_root_domain)GetProcAddress(mono, "mono_get_root_domain");
-	fnAssemblyOpen = (t_mono_assembly_open)GetProcAddress(mono, "mono_assembly_open");
-	fnAssemblyGetImage = (t_mono_assembly_get_image)GetProcAddress(mono, "mono_assembly_get_image");
-	fnClassFromName = (t_mono_class_from_name)GetProcAddress(mono, "mono_class_from_name");
-	fnMethodFromName = (t_mono_class_get_method_from_name)GetProcAddress(mono, "mono_class_get_method_from_name");
-	fnRuntimeInvoke = (t_mono_runtime_invoke)GetProcAddress(mono, "mono_runtime_invoke");
-	fnGetRootDir = (t_mono_assembly_getrootdir)GetProcAddress(mono, "mono_assembly_getrootdir");
-}
+	void InjectMonoAssembly() {
+		std::string assemblyDir;
 
-void InjectMonoAssembly() {
-	std::string assemblyDir;
+		HMODULE mono;
+		MonoDomain* domain;
+		MonoAssembly* assembly;
+		MonoImage* image;
+		MonoClass* klass;
+		MonoMethod* method;
 
-	HMODULE mono;
-	MonoDomain* domain;
-	MonoAssembly* assembly;
-	MonoImage* image;
-	MonoClass* klass;
-	MonoMethod* method;
+		/* grab the mono dll module */
+		mono = LoadLibraryW(MONO_DLL);
+		/* initialize mono functions */
+		initMonoFunctions(mono);
+		/* grab the root domain */
+		domain = fnGetRootDomain();
+		fnThreadAttach(domain);
+		/* Grab our root directory*/
+		assemblyDir.append(fnGetRootDir());
+		assemblyDir.append(ASSEMBLY_PATH);
+		/* open payload assembly */
+		assembly = fnAssemblyOpen(assemblyDir.c_str(), NULL);
+		if (assembly == NULL) return;
+		/* get image from assembly */
+		image = fnAssemblyGetImage(assembly);
+		if (image == NULL) return;
+		/* grab the class */
+		klass = fnClassFromName(image, PAYLOAD_NAMESPACE, PAYLOAD_CLASS);
+		if (klass == NULL) return;
+		/* grab the hack entrypoint */
+		method = fnMethodFromName(klass, PAYLOAD_MAIN, 0);
+		if (method == NULL) return;
+		/* call our entrypoint */
+		fnRuntimeInvoke(method, NULL, NULL, NULL);
+	}
 
-	/* grab the mono dll module */
-	mono = LoadLibraryW(MONO_DLL);
-	/* initialize mono functions */
-	initMonoFunctions(mono);
-	/* grab the root domain */
-	domain = fnGetRootDomain();
-	fnThreadAttach(domain);
-	/* Grab our root directory*/
-	assemblyDir.append(fnGetRootDir());
-	assemblyDir.append(ASSEMBLY_PATH);
-	/* open payload assembly */
-	assembly = fnAssemblyOpen(assemblyDir.c_str(), NULL);
-	if (assembly == NULL) return;
-	/* get image from assembly */
-	image = fnAssemblyGetImage(assembly);
-	if (image == NULL) return;
-	/* grab the class */
-	klass = fnClassFromName(image, PAYLOAD_NAMESPACE, PAYLOAD_CLASS);
-	if (klass == NULL) return;
-	/* grab the hack entrypoint */
-	method = fnMethodFromName(klass, PAYLOAD_MAIN, 0);
-	if (method == NULL) return;
-	/* call our entrypoint */
-	fnRuntimeInvoke(method, NULL, NULL, NULL);
-}
+	BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
+		switch (ul_reason_for_call)
+		{
+		case DLL_PROCESS_ATTACH:
+			InjectMonoAssembly();
+			break; // Investigate Removing as may not be needed
+		case DLL_THREAD_DETACH:
+		case DLL_PROCESS_DETACH:
+			break;
+		}
+		return TRUE;
+	}
+	```
+	- Adjust the following: Change ASSEMBLY_PATH and PAYLOAD_NAMESPACE to match your project setup.
+4. Step 4: Compiling and injecting
+1. Build both projects:
+	- In Visual Studio, go to Build > Build Solution for both the C# and C++ projects.
+2. Copy the C# .dll:
+	- Locate your C# DLL in the project folder (e.g., under x64 Debug) and copy it to the game’s Managed folder.
+3. Launch the game:
+	- Start your game and wait until you are fully loaded in.
+4. Inject the .dll:
+	- Open Process Hacker, find your game process, right-click, and select Miscellaneous > Inject DLL. Navigate to your C++ DLL injector file and select it.
 
-BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
-    switch (ul_reason_for_call)
-    {
-    case DLL_PROCESS_ATTACH:
-		InjectMonoAssembly();
-        break; // Investigate Removing as may not be needed
-    case DLL_THREAD_DETACH:
-    case DLL_PROCESS_DETACH:
-        break;
-    }
-    return TRUE;
-}
-```
-- Change ASSEMBLY_PATH and PAYLOAD_NAMESPACE to the appropriate names you will have to figure this out as I do not know what you will name your stuff.
+# Conclusion
+If all steps were followed correctly, you should see the "Cheat Activated!" message in the top corner of your game. Now, you can start exploring and creating your own cheats! Use dnSpy to discover game functions and data, especially in the Assembly-CSharp.dll file.
 
-> Next steps:
-- In both projects build them by hovering over Build then choosing Build solution. Where these files will go may depend on how you set them up but by default it should be in the projects folder under x64 Debug.
-- copy the C# cheat .dll file and paste it into your games Managed folder do not rename it.
-- Open your game and get loaded in
-- Open process hacker
-- In process hacker find your games process right click on it and then go to miscellaneous then inject DLL path it to your C++ .dll Mono injector file which will be in its project folder under x64 Debug.
-- Tada you should now see the text in your game if you followed all the steps! That's it now build your awesome cheats! Use DNS Spy to find game functions and data (the most important .dll file is Assembly-CSharp.dll file thank me later)
+# Ethical Disclaimer
+This writeup is meant for educational purposes only.

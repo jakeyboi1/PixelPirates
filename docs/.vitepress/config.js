@@ -1,4 +1,4 @@
-import { getSidebar } from "vitepress-plugin-auto-sidebar";
+//import { getSidebar } from "vitepress-plugin-auto-sidebar";
 
 export default {
   base: "/PixelPirates/",
@@ -7,11 +7,7 @@ export default {
   lastUpdated: true,
   cleanUrls: true,
   themeConfig: {
-    //logo: "/logo.svg",
-    editLink: {
-      pattern: "https://github.com/AndrewR3K/vitepress-boilerplate/edit/main/docs/:path",
-      text: "Edit this page on GitHub",
-    },
+    logo: "/logo.png",
     siteTitle: "Pixel Pirates",
     outline: "deep",
     nav: [
@@ -41,8 +37,8 @@ export default {
       ]
     },
     footer: {
-      message: "Released under the GNU General Public License v2.0.",
-      copyright: "Copyright © 2022-present Vitepress Boilerplate",
+      message: "Released under the GNU General Public License v3.0.",
+      copyright: "Copyright © 2022-present Pixel Pirates",
     },
   },
 };

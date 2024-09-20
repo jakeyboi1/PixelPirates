@@ -5,10 +5,10 @@ title: Home
 hero:
   name: Pixel Pirates
   text: A game hacking website!
-  #image:
-   # src: /logo.svg
-    #alt: Vitepress logo
-  tagline: A one stop shop for simple, in-depth, quality information regarding all things game hacking!
+  image:
+    src: /logo.png
+    alt: Pixel Pirates Logo
+  tagline: A hub of information regarding all things game hacking!
   actions:
     - theme: alt
       text: View on GitHub
@@ -17,14 +17,14 @@ hero:
 # Features section
 features:
   - icon: ⚡️
-    title: What we offer
-    details: We offer a wide variety of things such as writeups, guides, tutorials and more!
+    title: What is Pixel Pirates?
+    details: Hi I am Jake the person behind Pixel Pirates I have 3 years of programming experience with a wide variety of languages. I recently became drawn in by game hacking and have since fallen in love. This site is made as a way for me to mainly recorded my discoveries in an easy to navigate fashion, but also to allow other newbies to learn from my writeups and discoveries! Disclaimer I am very new to game hacking, I am actively learning, I do not claim to be a professional, this site is merely to keep track and share what I have found works for me.
   - icon: 🎉
     title: Free Always
-    details: With how few sites there are out there that offer quality information on game hacking for free there needs to be more free places that offer amazing information. As such we are free nnow and forever.
+    details: I absolutely despise how many of the places that provide good, easy to navigate, and well written content on game hacking almost always have a paywall. This site will always be free, as I think having a place that has quality information in a singlue easy to approach hubs is one of the best resources to learn game hacking.
   - icon: 🔥
-    title: Always learning
-    details: We encourage learning and not copy pasting! We do not and will not code your cheats for you, we will however give you the knowledge to learn to do it yourself!
+    title: Always Learning
+    details: This site is meant to provide information on game hacking. If you ware simply wanting to copy paste then this is not the site for you, while a lot of stuff will be copy pastable, the goal is to learn. Please do yourself the favor and learn for yourself do not just copy what you see here.
 
 # Meta property
 head:
@@ -34,17 +34,11 @@ head:
   - - meta
     - property: og:title
       content: Pixel Pirates
-  #- - meta
-   # - property: og:image
-    #  content: https://codybontecou.com/assets/vite-logo.17e50649.svg
   - - meta
     - name: title
       content: Pixel Pirates
-  #- - meta
-    #- name: twitter:card
-   #   content: https://codybontecou.com/assets/vite-logo.17e50649.svg
-  #- - link
-   # - rel: icon
-    #  type: image/svg
-     # href: logo.svg
+  - - link
+    - rel: icon
+      type: image/png
+      href: logo.png
 ---

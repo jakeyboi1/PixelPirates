@@ -23,7 +23,6 @@ By embedding Mono in a C++ DLL, we can instruct the Unity game to run our C# che
 - [dnSpy](https://github.com/dnSpyEx/dnSpy)
 - [Process Hacker](https://sourceforge.net/projects/processhacker/) (Or any .dll injector)
 - [Visual Studio Community 2022](https://visualstudio.microsoft.com/vs/)
-- [Mono](https://www.mono-project.com/download/stable/)
 
 # Credits:
 - [Beginners Guide Hacking Unity Games](https://www.unknowncheats.me/forum/general-programming-and-reversing/285864-beginners-guide-hacking-unity-games.html)
@@ -31,7 +30,7 @@ By embedding Mono in a C++ DLL, we can instruct the Unity game to run our C# che
 
 # Step by Step Process:
 ### Step 1: Preparing Your Enviornment
-1. Install Mono and dnSpy
+1. Install dnSpy
 2. Determine The .NET Version:
 	- Use dnSpy to open a DLL from the game's Managed folder. Look for the Runtime version (e.g., .NET Framework 3.5 for The Forest).
 
@@ -82,9 +81,7 @@ By embedding Mono in a C++ DLL, we can instruct the Unity game to run our C# che
 
 ### Step 3: Creating our C++ Mono Injector
 1. Create a new Dynamic-Link Library (DLL) project in Visual Studio
-2. Set up include directories:
-	- Click on Project at the top, then go to project properties, then C/C++, then inside the Additional Include Directories text box add the path to our Mono includes: C:\Program Files\Mono\include\mono-2.0
-3. Implement injector code:
+2. Implement injector code:
 	- Use the following code:
 	``` cpp
 	// dllmain.cpp : Defines the entry point for the DLL application.

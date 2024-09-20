@@ -183,7 +183,7 @@ By embedding Mono in a C++ DLL, we can instruct the Unity game to run our C# che
 	}
 	```
 	- Adjust the following: Change ASSEMBLY_PATH and PAYLOAD_NAMESPACE to match your project setup.
-4. Step 4: Compiling and injecting
+### Step 4: Compiling and injecting
 1. Build both projects:
 	- In Visual Studio, go to Build > Build Solution for both the C# and C++ projects.
 2. Copy the C# .dll:

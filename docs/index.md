@@ -3,31 +3,28 @@ layout: home
 title: Home
 # Hero section
 hero:
-  name: VitePress Boilerplate
-  text: Vite & Vue Powered Static Site Generator
-  image:
-    src: /logo.svg
-    alt: Vitepress logo
-  tagline: Simple, powerful, and performant. Meet the modern SSG framework you've always wanted.
+  name: Pixel Pirates
+  text: A game hacking website!
+  #image:
+   # src: /logo.svg
+    #alt: Vitepress logo
+  tagline: A one stop shop for simple, in-depth, quality information regarding all things game hacking!
   actions:
-    - theme: brand
-      text: Get Started
-      link: /getstarted
     - theme: alt
       text: View on GitHub
-      link: https://github.com/AndrewR3K/vitepress-boilerplate
+      link: https://github.com/jakeyboi1/PixelPirates
 
 # Features section
 features:
   - icon: ⚡️
-    title: Fully static yet still dynamic
-    details: Go wild with true SSG + SPA architecture. Static on page load, but engage users with 100% interactivity from there.
+    title: What we offer
+    details: We offer a wide variety of things such as writeups, guides, tutorials and more!
   - icon: 🎉
-    title: Designed to be simplicity first
-    details: With Markdown-centered content, it's built to help you focus on writing and deployed with minimum configuration.
+    title: Free Always
+    details: With how few sites there are out there that offer quality information on game hacking for free there needs to be more free places that offer amazing information. As such we are free nnow and forever.
   - icon: 🔥
-    title: Power of Vue meets Markdown
-    details: Enhance your content with all the features of Vue in Markdown, while being able to customize your site with Vue.
+    title: Always learning
+    details: We encourage learning and not copy pasting! We do not and will not code your cheats for you, we will however give you the knowledge to learn to do it yourself!
 
 # Meta property
 head:
@@ -36,18 +33,18 @@ head:
       content: website
   - - meta
     - property: og:title
-      content: Vitepress Boilerplate
-  - - meta
-    - property: og:image
-      content: https://codybontecou.com/assets/vite-logo.17e50649.svg
+      content: Pixel Pirates
+  #- - meta
+   # - property: og:image
+    #  content: https://codybontecou.com/assets/vite-logo.17e50649.svg
   - - meta
     - name: title
-      content: Vitepress Boilerplate
-  - - meta
-    - name: twitter:card
-      content: https://codybontecou.com/assets/vite-logo.17e50649.svg
-  - - link
-    - rel: icon
-      type: image/svg
-      href: logo.svg
+      content: Pixel Pirates
+  #- - meta
+    #- name: twitter:card
+   #   content: https://codybontecou.com/assets/vite-logo.17e50649.svg
+  #- - link
+   # - rel: icon
+    #  type: image/svg
+     # href: logo.svg
 ---

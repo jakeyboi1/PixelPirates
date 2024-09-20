@@ -2,41 +2,43 @@ import { getSidebar } from "vitepress-plugin-auto-sidebar";
 
 export default {
   base: "/PixelPirates/",
-  title: "VitePress Boilerplate",
-  description: "An awesome boilerplate for a simple vitepress site",
+  title: "Pixel Pirates",
+  description: "A site dedicated to everything game hacking!",
   lastUpdated: true,
   cleanUrls: true,
   themeConfig: {
-    logo: "/logo.svg",
+    //logo: "/logo.svg",
     editLink: {
       pattern: "https://github.com/AndrewR3K/vitepress-boilerplate/edit/main/docs/:path",
       text: "Edit this page on GitHub",
     },
-    siteTitle: "Vitepress Boilerplate",
+    siteTitle: "Pixel Pirates",
     outline: "deep",
     nav: [
-      { text: "Get Started", link: "/getstarted" },
-      { text: "About", link: "/about" },
-      { text: "Docs", link: "/api" },
-      { text: "Team", link: "/team" },
+      { text: "Home", link: "/" },
+      {
+        text: 'Content',
+        items: [
+          { text: 'Writeups', link: '/writeups/intro' },
+          { text: 'Item B', link: '/item-2' },
+          { text: 'Item C', link: '/item-3' }
+        ]
+      }
     ],
     socialLinks: [
-      { icon: "github", link: "https://github.com/AndrewR3K/vitepress-boilerplate" },
-      { icon: "discord", link: "..." },
+      { icon: "github", link: "https://github.com/jakeyboi1" }
     ],
     sidebar: {
-      "/api/": getSidebar({
-        contentRoot: "/docs",
-        contentDirs: ["api"],
-        collapsible: true,
-        collapsed: false,
-      }),
-      "/api": getSidebar({
-        contentRoot: "/docs",
-        contentDirs: ["api"],
-        collapsible: true,
-        collapsed: false,
-      }),
+      '/writeups/': [
+        { text: "Intro", link: "/writeups/intro" },
+        {
+          text: "Unity",
+          collapsed: true,
+          items: [
+            { text: "Hacking Mono Games", link: "/writeups/unity/hackingmonogames.md" }
+          ],
+        }
+      ]
     },
     footer: {
       message: "Released under the GNU General Public License v2.0.",

@@ -21,7 +21,7 @@ features:
     details: Hi I am Jake the person behind Pixel Pirates I have 3 years of programming experience with a wide variety of languages. I recently became drawn in by game hacking and have since fallen in love. This site is made as a way for me to mainly recorded my discoveries in an easy to navigate fashion, but also to allow other newbies to learn from my writeups and discoveries! Disclaimer I am very new to game hacking, I am actively learning, I do not claim to be a professional, this site is merely to keep track and share what I have found works for me.
   - icon: 🎉
     title: Free Always
-    details: I absolutely despise how many of the places that provide good, easy to navigate, and well written content on game hacking almost always have a paywall. This site will always be free, as I think having a place that has quality information in a singlue easy to approach hubs is one of the best resources to learn game hacking.
+    details: I know how frustrating it can be to find quality information on game hacking that is not behind a paywall. That’s why I created this site—to provide accessible, well-written, and easy-to-navigate content completely free of charge. My goal is to create a welcoming hub where anyone can learn everything they need about game hacking without any barriers.
   - icon: 🔥
     title: Always Learning
     details: This site is meant to provide information on game hacking. If you ware simply wanting to copy paste then this is not the site for you, while a lot of stuff will be copy pastable, the goal is to learn. Please do yourself the favor and learn for yourself do not just copy what you see here.

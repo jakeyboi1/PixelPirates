@@ -91,7 +91,15 @@ By embedding Mono in a C++ DLL, we can instruct the Unity game to run our C# che
 	#include "pch.h"
 	#include <windows.h>
 	#include <iostream>
-	#include <mono/jit/jit.h>
+
+ 	// Added to remove need for mono headers
+	typedef VOID MonoObject;
+	typedef VOID MonoDomain;
+	typedef VOID MonoAssembly;
+	typedef VOID MonoImage;
+	typedef VOID MonoClass;
+	typedef VOID MonoMethod;
+	typedef VOID MonoImageOpenStatus;
 
 	#define ASSEMBLY_PATH "/TheForestCheato.dll" // Change to your file name (this depends on what you named your project)
 	#define PAYLOAD_NAMESPACE "TheForestCheato" // Change to your namespace (This will depend on what your namespace in your C# code is)

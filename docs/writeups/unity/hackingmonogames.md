@@ -39,7 +39,7 @@ By embedding Mono in a C++ DLL, we can instruct the Unity game to run our C# che
 	- Choose Class Library (.NET Framework)
 	- Select the appropriate .NET version for your game
 2. Add references:
-	- Hover over project at the top, then choose the add reference option, then click browse in the window it displays, then click browse at the bottom right to open your files, Navigate to your games Managed folder and add the .dll files you require, to start add the Assembly-CSharp.dll file.
+	- Hover over project at the top, then choose the add reference option, then click browse in the window it displays, then click browse at the bottom right to open your files, Navigate to your games Managed folder and add the .dll files you require, for this example add the UnityEngine.dll file note as you build your cheat you may need to add more of the games dll files depending on what you make.
 	- An example of what the path to the games Managed folder should look like: C:\Program Files (x86)\Steam\steamapps\common\The Forest\TheForest_Data\Managed
 3. Coding the cheat:
 	- Enter the following code:
@@ -194,7 +194,7 @@ By embedding Mono in a C++ DLL, we can instruct the Unity game to run our C# che
 	- Open Process Hacker, find your game process, right-click, and select Miscellaneous > Inject DLL. Navigate to your C++ DLL injector file and select it.
 
 # Conclusion
-If all steps were followed correctly, you should see the "Cheat Activated!" message in the top corner of your game. Now, you can start exploring and creating your own cheats! Use dnSpy to discover game functions and data, especially in the Assembly-CSharp.dll file.
+If all steps were followed correctly, you should see the "Cheat Activated!" message in the top corner of your game. Now, you can start exploring and creating your own cheats! Use dnSpy to discover game functions and data in the games dll files.
 
 # Ethical Disclaimer
 This writeup is meant for educational purposes only.

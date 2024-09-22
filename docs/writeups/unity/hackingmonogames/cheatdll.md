@@ -12,7 +12,7 @@
 7. You will then see in purple UnityEngine.dll
 8. Click on UnityEngine.dll not the drop down.
 9. In the right side of your screen some text will appear.
-10. In that texxt you will see Runtime: .NET Framework 3.5 (3.5 is the .NET version, this will change depending on the game)
+10. In that text you will see Runtime: .NET Framework 3.5 (3.5 is the .NET version, this will change depending on the game)
 
 ## Step 2: Create our Visual Studio Project
 1. Open Visual Studio Community 2022

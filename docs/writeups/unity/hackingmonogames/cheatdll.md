@@ -30,6 +30,7 @@
 1. Click Project then click the add reference option
 2. Click Browse in the window it popped up and then click browse in the bottom right
 3. Navigate to your games Managed folder, and choose the UnityEngine.dll and click add then click ok
+4. Remove all the premade code
 
 ## Step 4: The Code
 1. I will now send the code for the cheat, type this code into your project or copy paste it.

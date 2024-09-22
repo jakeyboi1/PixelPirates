@@ -13,7 +13,7 @@
 3. This writeup will only work on Windows, and I can only confirm it on Windows 11, but I assume it works on Windows 10 aswell.
 
 ### What is Unity?
-1. Unity is a popular game engine. It has made countless popular games notably: Esccape From Tarkov, Rust and many more.
+1. Unity is a popular game engine. It has made countless popular games notably: Escape From Tarkov, Rust and many more.
 2. Unity has 2 methods of compiling your C# code to code the computer can understand.
     - IL2CPP I will not describe this as this writeup is for mono games, but I thought it important to mention.
     - Mono

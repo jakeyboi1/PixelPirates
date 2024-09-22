@@ -2,7 +2,7 @@
 > This will go over making our cheat DLL that we will be injecting into the game. This is where you will actually write your cheats themselves.
 
 ## Step 1: Determining the .NET Version
->  We must determin what .NET version our game is running on, as we will have to use the same .NET version for our project.
+>  We must determine what .NET version our game is running on, as we will have to use the same .NET version for our project.
 1. Open dnSpy
 2. Click file at the top left, then click open
 3. Browse to your games Managed folder

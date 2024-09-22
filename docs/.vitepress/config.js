@@ -31,8 +31,18 @@ export default {
           text: "Unity",
           collapsed: true,
           items: [
-            { text: "Hacking Mono Games", link: "/writeups/unity/hackingmonogames.md" }
-          ],
+            {
+              text: "Hacking Mono Games",
+              collapsed: true,
+              items: [
+                { text: "Step 1: Introduction", link: "/writeups/unity/hackingmonogames/introduction.md" },
+                { text: "Step 2: Making our DLL Injector", link: "/writeups/unity/hackingmonogames/dllinjector.md" },
+                { text: "Step 3: Making our Mono Loader", link: "/writeups/unity/hackingmonogames/monoloader.md" },
+                { text: "Step 4: Making our Cheat DLL", link: "/writeups/unity/hackingmonogames/cheatdll.md" },
+                { text: "Step 5: Injecting Our Cheat", link: "/writeups//unity/hackingmonogames/injectingcheat.md" }
+              ]
+            }
+          ]
         }
       ]
     },

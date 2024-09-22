@@ -37,7 +37,7 @@ DLL Injection is a method used for runnning code within the address space of ano
 ## Prerequisites:
 > These are things you must have before even attempting to hack Mono Unity games.
 - An understanding of programming, and programming principles. This does not have to be with C++ or C# I for example have little experience with these langauges but because I have programmed for years with many languages I can adapt to use them without much difficulty because I know the base concepts of programming.
-- A desire to learn. This stuff is very hard, and uses low leven knowledge. It will take time to understand.
+- A desire to learn. This stuff is very hard, and uses low level knowledge. It will take time to understand.
 - Be okay with using AI ChatGPT will be your best friend, for explaining these often hard to find topics. Just do not use it to copy paste use it to actually learn.
 
 ## Credits:

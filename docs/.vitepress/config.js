@@ -41,6 +41,16 @@ export default {
                 { text: "Step 4: Making our Cheat DLL", link: "/writeups/unity/hackingmonogames/cheatdll.md" },
                 { text: "Step 5: Injecting Our Cheat", link: "/writeups//unity/hackingmonogames/injectingcheat.md" }
               ]
+            },
+            {
+              text: "Hacking IL2CPP Games",
+              collapsed: true,
+              items: [
+                { text: "Step 1: Introduction", link: "/writeups/unity/hackingil2cppgames/introduction.md" },
+                { text: "Step 2: Making our DLL Injector", link: "/writeups/unity/hackingil2cppgames/dllinjector.md" },
+                { text: "Step 3: Making our IL2CPP Base DLL", link: "/writeups/unity/hackingil2cppgames/il2cppbase.md" },
+                { text: "Step 4: Injecting Our Cheat", link: "/writeups//unity/hackingil2cppgames/injectingcheat.md" }
+              ]
             }
           ]
         }

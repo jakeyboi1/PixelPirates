@@ -257,3 +257,4 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 - It is like you are scripting inside of the Unity Engine itself at this point, as you can see in the above example I showed how to get the camera class and change fov, you can find more stuff like this  within the unity docs.
 - You can find more information about the Unity API [here](https://docs.unity3d.com/ScriptReference/)
 - Now if you want to call game functions that arent base unity functions keep in mind they may have there own types and signatures that you will need to reverse engineer on your own similar to how we typedefed the il2cpp functions. It all depends so I cant walk you through that.
+- I have a slightly more advanced source code available [here](https://github.com/jakeyboi1/IL2CPPBase)
